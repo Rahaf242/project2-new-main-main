@@ -42,9 +42,13 @@ class _UserinterfaceState extends State<Userinterface>
         ),
         body: Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('lib/assets/Photos/background.jpg'),
-              fit: BoxFit.cover,
+            gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [
+                Colors.lightBlue[200]!, // Light blue ombre
+                Colors.orange[200]! // Light orange
+              ],
             ),
           ),
           child: Padding(
@@ -59,7 +63,7 @@ class _UserinterfaceState extends State<Userinterface>
                       return Container(
                         width: _animation.value,
                         height: _animation.value,
-                        child: Image.asset('lib/assets/Photos/logowithoutbackground.png'),
+                        child: Image.asset('lib/assets/Photos/logo.png'),
                       );
                     },
                   ),

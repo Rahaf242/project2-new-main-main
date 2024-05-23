@@ -42,9 +42,13 @@ class _LoginState extends State<Login> {
 
           body: Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('lib/assets/Photos/background.jpg'),
-                fit: BoxFit.cover,
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.lightBlue[200]!, // Light blue ombre
+                  Colors.orange[200]! // Light orange
+                ],
               ),
             ),
 

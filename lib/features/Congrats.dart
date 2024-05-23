@@ -76,7 +76,7 @@ class _CongratsState extends State<Congrats> {
           Center(
             child: Appbuttons(
               text: "Continue",
-              routeName: '/Login',
+              routeName: '/LandPage',
               width: 200,
               height: 50,
             ),

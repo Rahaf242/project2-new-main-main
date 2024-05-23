@@ -157,7 +157,7 @@ class _RegistrationRequestsPageState extends State<RegistrationRequestsPage> {
         body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('lib/assets/Photos/logo.jpg'),
+                image: AssetImage('lib/assets/Photos/logo.png'),
                 fit: BoxFit.cover,
               ),
             ),

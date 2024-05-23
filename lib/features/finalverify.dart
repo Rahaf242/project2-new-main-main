@@ -34,6 +34,7 @@ class finalverfiyState extends State<finalverfiy> with TickerProviderStateMixin 
   late final AnimationController _animationController;
   final List<String> _sentences = Sentences.sentences;
   var sentenceCount = 0;
+  var UnsecAt=0;
   String audioPath = '';
   @override
   void initState() {
@@ -83,25 +84,31 @@ class finalverfiyState extends State<finalverfiy> with TickerProviderStateMixin 
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Text("Record Your Voice", style: TextStyle(fontSize: 32)),
-              const SizedBox(height: 16),
+              const SizedBox(height: 50),
               const Text("Tap the microphone icon and talk about yourself in length",
-                  style: TextStyle(fontSize: 16)),
+                  style: TextStyle(fontSize: 20),
+                  textAlign: TextAlign.center,
+                  ),
               const SizedBox(height: 16),
+              
               
               GestureDetector(
                 onTap: () =>
                 _isRecording
                     ? _stopAndSaveRecording()
                     : _startRecording(),
-                child: Lottie.asset(
-                  "assets/microphone.json",
-                  controller: _animationController,
-                  onLoaded: (composition) =>
-                  _animationController.duration = composition.duration,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 120.0),
+                  child: Lottie.asset(
+                    "assets/microphone.json",
+                    controller: _animationController,
+                    onLoaded: (composition) =>
+                    _animationController.duration = composition.duration,
 
                 ),
               ),
-            
+              ),
+
               Expanded(
                 child: ListView.builder(
                   itemCount: _recordings.length,
@@ -296,15 +303,15 @@ class finalverfiyState extends State<finalverfiy> with TickerProviderStateMixin 
     if (path != null) {
       final duration = await _getAudioDuration(
           path); // Get the duration of the audio
-      if (duration < Duration(seconds: 2) || duration > Duration(seconds: 6)) {
+      if (duration < Duration(seconds: 9) || duration > Duration(seconds: 25)) {
         // Determine if the duration is too long or too short
         String errorMessage;
-        if (duration < Duration(seconds: 3)) {
+        if (duration < Duration(seconds: 10)) {
           errorMessage =
-          "Recording is too short. It must be at least 3 seconds long.";
+          "Recording is too short. It must be at least 10 seconds long.";
         } else {
           errorMessage =
-          "";
+          "Recording is too long. It must be at most 25 seconds long.";
         }
         // Display error message to the user
         showDialog(
@@ -351,7 +358,7 @@ Future<void> uploadAndDeleteRecording(path) async {
   print("Uid ----------------------${savedUid}------------------------");
     //try
      {
-      final url = Uri.parse('http://10.0.0.56:5000/auth/');  //plug user's UID here 
+      final url = Uri.parse('http://10.0.0.56:5000/auth');  //plug user's UID here 
       final file = File(path);
       if (!file.existsSync()) {
         print("UPLOADING FILE NOT EXIST+++++++++++++++++++++++++++++++++++++++++++++++++");
@@ -388,6 +395,29 @@ Future<void> uploadAndDeleteRecording(path) async {
                   MaterialPageRoute(builder: (context) =>  Congrats()),
                 );
           }
+          else {
+            UnsecAt++;
+            showDialog(context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text("Recording Error"),
+                content: Text("Current speaker is not the logged in user\n Nunmer of unseccesful attempts: $UnsecAt /3"),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      },
+                      child: const Text("Try Again"),
+                      ),
+              ],
+            );
+          },
+        );
+        if(UnsecAt == 3){
+          Navigator.pushReplacementNamed(context, "/LandPage");
+
+        }
+        }
       
   } else {
     print('Failed to upload file. Status code: ${response.statusCode}');

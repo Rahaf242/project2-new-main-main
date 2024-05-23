@@ -20,6 +20,7 @@ import 'package:flutter_interfaces/routes/routes_constants.dart';
 import 'package:flutter_interfaces/features/finalverify.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:flutter_interfaces/features/Speechtotextt.dart';
+import 'package:flutter_interfaces/features/Randomtext.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
         "/Congrats": (context) => const Congrats(),
         "/Report": (context) =>  Report(),
         "/finalverfiy": (context) => finalverfiy(),
+        "/Randomtext": (context) => const Randomtext(),
 
 
 

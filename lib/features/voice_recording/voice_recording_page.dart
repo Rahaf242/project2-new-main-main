@@ -132,7 +132,7 @@ class VoiceRecordPageState extends State<VoiceRecordPage> with TickerProviderSta
       leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
-          _recordings.length < 4
+          _recordings.length < 1
               ? Navigator.pushReplacementNamed(context, "/Login")
               : Navigator.pushReplacementNamed(context, "/Userinterface");
         },
@@ -417,7 +417,7 @@ Future<void> uploadAndDeleteRecording(path) async {
   print("Uid ----------------------${savedUid}------------------------");
     //try
      {
-      final url = Uri.parse('http://192.168.8.116:5000/train/$savedUid');  //plug user's UID here 
+      final url = Uri.parse('http://10.0.0.56:5000/train/$savedUid');  //plug user's UID here 
       final file = File(path);
       if (!file.existsSync()) {
         print("UPLOADING FILE NOT EXIST+++++++++++++++++++++++++++++++++++++++++++++++++");

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Widgets/Appbuttons.dart';
+import 'package:flutter_interfaces/features/Randomtext.dart';
 
 class Managerinterface extends StatefulWidget {
   const Managerinterface({Key? key}) : super(key: key);
@@ -38,9 +39,13 @@ class _ManagerinterfaceState extends State<Managerinterface>
       ),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('lib/assets/Photos/background.jpg'), // Replace with your image path
-            fit: BoxFit.cover, // Cover the entire screen
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            colors: [
+              Colors.lightBlue[200]!, // Light blue ombre
+              Colors.orange[200]! // Light orange
+            ],
           ),
         ),
         child: Padding(
@@ -55,7 +60,7 @@ class _ManagerinterfaceState extends State<Managerinterface>
                     return Container(
                       width: _animation.value,
                       height: _animation.value,
-                      child: Image.asset('lib/assets/Photos/logowithoutbackground.png'),
+                      child: Image.asset('lib/assets/Photos/logo.png'),
                     );
                   },
                 ),
@@ -64,6 +69,8 @@ class _ManagerinterfaceState extends State<Managerinterface>
                   text: "Registration Requests",
                   routeName: '/RegistrationRequestsPage',
                 ),
+                SizedBox(height: 20),
+                Appbuttons(text: "Random Texts", routeName: '/Randomtext'),
                 SizedBox(height: 20),
                 Appbuttons(text: "Reports", routeName: '/Report'),
                 SizedBox(height: 20),
